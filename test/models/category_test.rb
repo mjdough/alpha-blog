@@ -1,5 +1,7 @@
 require 'test_helper'
+
 class CategoryTest < ActiveSupport::TestCase
+    
     def setup
        @category = Category.new(name: "sports")
     end
@@ -10,7 +12,7 @@ class CategoryTest < ActiveSupport::TestCase
     
     test "name should be present" do
         @category.name = " "
-        assert_not @categror.valid?
+        assert_not @category.valid?
     end
     
     test "name should be unique" do
@@ -20,7 +22,8 @@ class CategoryTest < ActiveSupport::TestCase
     end
     
     test "name should not be too long" do
-        @category.name = "a" + 26
+        @category.name = "a" * 26
+        assert_not @category.valid?
     end
     
     test "name should not be too short" do
